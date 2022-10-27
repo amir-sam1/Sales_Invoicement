@@ -25,8 +25,8 @@ public class buttons_action {
     }
 
     public void insertButtonInDialog() {
-        String customerNameDialogString = frame.getNewInvoiceDialog().getCustomerNameJTextField().getText();
-        String dateDialogString = frame.getNewInvoiceDialog().getInvoiceDateJTextField().getText();
+        String customerNameDialogString = frame.getNewInvoiceDialog().getCustomerNameJText().getText();
+        String dateDialogString = frame.getNewInvoiceDialog().getInvoiceDateJText().getText();
 
         frame.getNewInvoiceDialog().setVisible(false);
         frame.getNewInvoiceDialog().dispose();
@@ -70,17 +70,17 @@ public class buttons_action {
     }
 
     public void deleteInvoiceButton() {
-        int invoiceIndex = frame.getInvoiceTableJTableLeftSide().getSelectedRow();
+        int invoiceIndex = frame.getInvoiceJTable().getSelectedRow();
         InvoiceHeader header = frame.getInvoiceHeaderJTableModel().getInvoicesHeaderList().get(invoiceIndex);
         frame.getInvoiceHeaderJTableModel().getInvoicesHeaderList().remove(invoiceIndex);
         frame.getInvoiceHeaderJTableModel().fireTableDataChanged();
         frame.setInvoiceLineJTableModel(new InvoiceLineJTableModel(new ArrayList<InvoiceLine>()));
-        frame.getInvoiceItemJTableRightSide().setModel(frame.getInvoiceLineJTableModel());
+        frame.getInvoiceItem().setModel(frame.getInvoiceLineJTableModel());
         frame.getInvoiceLineJTableModel().fireTableDataChanged();
-        frame.getCustomerNameJTextField().setText("");
-        frame.getInvoiceDateJTextField().setText("");
-        frame.getInvoiceNumberJLabel().setText("");
-        frame.getInvoiceTotalJLabel().setText("");
+        frame.getCustomerName().setText("");
+        frame.getInvoiceDate().setText("");
+        frame.getInvoiceNumber().setText("");
+        frame.getInvoiceTotal().setText("");
     }
 
     public void displaySaveButtonNewLineDialog() {
@@ -91,9 +91,9 @@ public class buttons_action {
     public void okButtonNewLineInDialog() {
 
         int itemNumber = InvoiceHeaderJTableModel.ItemNumberInt;
-        String itemNameString = frame.getSaveLineDialog().getItemNameJTextField().getText();
-        String itemCountString = frame.getSaveLineDialog().getItemCountJTextField().getText();
-        String itemPriceString = frame.getSaveLineDialog().getItemPriceJTextField().getText();
+        String itemNameString = frame.getSaveLineDialog().getItemNameJText().getText();
+        String itemCountString = frame.getSaveLineDialog().getItemCountJText().getText();
+        String itemPriceString = frame.getSaveLineDialog().getItemPriceJText().getText();
 
         frame.getSaveLineDialog().setVisible(false);
         frame.getSaveLineDialog().dispose();
@@ -101,14 +101,14 @@ public class buttons_action {
 
         int itemCountInt = Integer.parseInt(itemCountString);
         double itemPriceDouble = Double.parseDouble(itemPriceString);
-        int headerIndexInt = frame.getInvoiceTableJTableLeftSide().getSelectedRow();
+        int headerIndexInt = frame.getInvoiceJTable().getSelectedRow();
         InvoiceHeader invoice = frame.getInvoiceHeaderJTableModel().getInvoicesHeaderList().get(headerIndexInt);
 
         InvoiceLine invoiceLine = new InvoiceLine(itemNumber, itemNameString, itemPriceDouble, itemCountInt, invoice);
         invoice.addInvoiceLine(invoiceLine);
         frame.getInvoiceLineJTableModel().fireTableDataChanged();
         frame.getInvoiceHeaderJTableModel().fireTableDataChanged();
-        frame.getInvoiceTotalJLabel().setText("" + invoice.getInvoiceTotal());
+        frame.getInvoiceTotal().setText("" + invoice.getInvoiceTotal());
         displayInvoices();
     }
 
@@ -119,11 +119,11 @@ public class buttons_action {
     }
 
     public void cancelButton() {
-        int lineIndex = frame.getInvoiceItemJTableRightSide().getSelectedRow();
+        int lineIndex = frame.getInvoiceItem().getSelectedRow();
         InvoiceLine line = frame.getInvoiceLineJTableModel().getInvoicesLinesList().get(lineIndex);
         frame.getInvoiceLineJTableModel().getInvoicesLinesList().remove(lineIndex);
         frame.getInvoiceLineJTableModel().fireTableDataChanged();
         frame.getInvoiceHeaderJTableModel().fireTableDataChanged();
-        frame.getInvoiceTotalJLabel().setText("" + line.getInvoiceHeader().getInvoiceTotal());
+        frame.getInvoiceTotal().setText("" + line.getInvoiceHeader().getInvoiceTotal());
     }
 }

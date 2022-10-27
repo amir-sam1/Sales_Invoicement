@@ -7,56 +7,56 @@ import javax.swing.JTextField;
 
 public class SaveLineDialog extends JDialog{
     private JLabel itemNameJLabel;
-    private JTextField itemNameJTextField;
+    private JTextField itemNameJText;
 
     private JLabel itemCountJLabel;
-    private JTextField itemCountJTextField;
+    private JTextField itemCountJText;
 
     private JLabel itemPriceJLabel;
-    private JTextField itemPriceJTextField;
+    private JTextField itemPriceJText;
 
-    private JButton okJButton;
-    private JButton cancelJButton;
+    private JButton okJB;
+    private JButton cancelJB;
 
     public SaveLineDialog(start frame) {
 
         setTitle("Create New Line");
         setLocation(300, 300);
 
-        itemNameJTextField = new JTextField(20);
+        itemNameJText = new JTextField(20);
         itemNameJLabel = new JLabel("Item Name");
 
-        itemCountJTextField = new JTextField(20);
+        itemCountJText = new JTextField(20);
         itemCountJLabel = new JLabel("Item Count");
 
-        itemPriceJTextField = new JTextField(20);
+        itemPriceJText = new JTextField(20);
         itemPriceJLabel = new JLabel("Item Price");
 
-        okJButton = new JButton("OK");
-        okJButton.setActionCommand("createLineOK");
-        okJButton.addActionListener(frame.getListner());
+        okJB = new JButton("OK");
+        okJB.setActionCommand("createLineOK");
+        okJB.addActionListener(frame.getListner());
 
-        cancelJButton = new JButton("Cancel");
-        cancelJButton.setActionCommand("createLineCancel");
-        cancelJButton.addActionListener(frame.getListner());
+        cancelJB = new JButton("Cancel");
+        cancelJB.setActionCommand("createLineCancel");
+        cancelJB.addActionListener(frame.getListner());
 
         setLayout(new GridLayout(4, 2));
 
         add(itemNameJLabel);
-        add(itemNameJTextField);
+        add(itemNameJText);
         add(itemCountJLabel);
-        add(itemCountJTextField);
+        add(itemCountJText);
         add(itemPriceJLabel);
-        add(itemPriceJTextField);
-        add(okJButton);
-        add(cancelJButton);
+        add(itemPriceJText);
+        add(okJB);
+        add(cancelJB);
 
         pack();
     }
 
-    public JTextField getItemNameJTextField() {return itemNameJTextField;}
+    public JTextField getItemNameJText() {return itemNameJText;}
 
-    public JTextField getItemCountJTextField() {return itemCountJTextField;}
+    public JTextField getItemCountJText() {return itemCountJText;}
 
-    public JTextField getItemPriceJTextField() {return itemPriceJTextField;}
+    public JTextField getItemPriceJText() {return itemPriceJText;}
 }

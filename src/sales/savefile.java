@@ -16,7 +16,7 @@ import static sales.loadFile.frame;
 
 public class savefile {
     private start frame;
-    private DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy"); // day - month - year
+    private DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
     public savefile(start frame) {this.frame = frame;}
 

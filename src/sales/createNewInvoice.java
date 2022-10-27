@@ -6,14 +6,13 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class createNewInvoice extends JDialog  {
-    private JLabel customerNameJLabel;
-    private JTextField customerNameJTextField;
 
     private JLabel invoiceDateJLabel;
-    private JTextField invoiceDateJTextField;
-
-    private JButton insertJButton;
-    private JButton cancelJButton;
+    private JTextField invoiceDateJText;
+    private JLabel customerNameJLabel;
+    private JTextField customerNameJText;
+    private JButton insertJB;
+    private JButton cancelJB;
 
     public createNewInvoice(start frame) {
 
@@ -21,36 +20,36 @@ public class createNewInvoice extends JDialog  {
         setLocation(300, 300);
 
         customerNameJLabel = new JLabel("Customer Name");
-        customerNameJTextField = new JTextField(15);
+        customerNameJText = new JTextField(15);
 
         invoiceDateJLabel = new JLabel("Invoice Date");
-        invoiceDateJTextField = new JTextField(15);
+        invoiceDateJText = new JTextField(15);
 
-        insertJButton = new JButton("Insert");
-        insertJButton.setActionCommand("InsertButtonInDialog");
-        insertJButton.addActionListener(frame.getListner());
+        insertJB = new JButton("Insert");
+        insertJB.setActionCommand("InsertButtonInDialog");
+        insertJB.addActionListener(frame.getListner());
 
-        cancelJButton = new JButton("Cancel");
-        cancelJButton.setActionCommand("CancelButtonInDialog");
-        cancelJButton.addActionListener(frame.getListner());
+        cancelJB = new JButton("Cancel");
+        cancelJB.setActionCommand("CancelButtonInDialog");
+        cancelJB.addActionListener(frame.getListner());
 
         setLayout(new GridLayout(3, 2, 15, 15));
 
         add(customerNameJLabel);
-        add(customerNameJTextField);
+        add(customerNameJText);
 
         add(invoiceDateJLabel);
-        add(invoiceDateJTextField);
+        add(invoiceDateJText);
 
-        add(insertJButton);
-        add(cancelJButton);
+        add(insertJB);
+        add(cancelJB);
 
         pack();
     }
 
 
 
-    public JTextField getCustomerNameJTextField() {return customerNameJTextField;}
+    public JTextField getCustomerNameJText() {return customerNameJText;}
 
-    public JTextField getInvoiceDateJTextField() {return invoiceDateJTextField;}
+    public JTextField getInvoiceDateJText() {return invoiceDateJText;}
 }

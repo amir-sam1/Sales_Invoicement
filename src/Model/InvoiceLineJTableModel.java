@@ -6,7 +6,7 @@ import javax.swing.table.AbstractTableModel;
 
 public class InvoiceLineJTableModel  extends AbstractTableModel{
     private List<InvoiceLine> invoicesLineList;
-    private DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy"); // day - month - year
+    private DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
     public InvoiceLineJTableModel(List<InvoiceLine> invoicesLinesList) {this.invoicesLineList = invoicesLinesList;}
 

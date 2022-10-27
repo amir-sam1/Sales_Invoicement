@@ -1,28 +1,24 @@
 package sales;
 import Model.InvoiceHeader;
 import Model.InvoiceHeaderJTableModel;
+import java.util.IllegalFormatException;
 import Model.InvoiceLine;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import java.lang.Exception;
-import java.lang.RuntimeException;
-import java.lang.IllegalArgumentException;
+import java.io.File;
+import java.io.FileReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.IllegalFormatException;
 
 public class loadFile {
     static  start frame;
-    private DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy"); // day - month - year
+    private DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
     public loadFile(start frame) {this.frame = frame;}
 
@@ -49,13 +45,13 @@ public class loadFile {
                             String invoiceDateString = splitHeaderLinesParts[1];
                             String invoiceCustomerNameString = splitHeaderLinesParts[2];
 
-                            // convert string to int
+
                             int invoiceNumberInt = Integer.parseInt(invoiceNumberString);
 
-                            // convert string to date
+
                             Date invoiceDate = dateFormat.parse(invoiceDateString);
 
-                            // call InvoiceHeader
+
                             InvoiceHeader invoice = new InvoiceHeader(invoiceNumberInt, invoiceCustomerNameString, invoiceDate);
 
                             frame.getInvoicesHeaderList().add(invoice);
@@ -103,11 +99,11 @@ public class loadFile {
                         String itemPriceString = splitLineLinesParts[2];
                         String itemCountString = splitLineLinesParts[3];
 
-                        // convert string to int
+
                         int itemNumberInt = Integer.parseInt(ItemNumberString);
                         int itemCountInt = Integer.parseInt(itemCountString);
 
-                        // convert string to double
+
                         double itemPriceDouble = Double.parseDouble(itemPriceString);
 
                         InvoiceHeader header = findInvoiceHeaderByNumber(itemNumberInt);
@@ -116,8 +112,8 @@ public class loadFile {
                         header.getInvoiceLines().add(invoiceLine);
                     }
                     frame.setInvoiceHeaderJTableModel(new InvoiceHeaderJTableModel(frame.getInvoicesHeaderList()));
-                    frame.getInvoiceTableJTableLeftSide().setModel(frame.getInvoiceHeaderJTableModel());
-                    frame.getInvoiceTableJTableLeftSide().validate();
+                    frame.getInvoiceJTable().setModel(frame.getInvoiceHeaderJTableModel());
+                    frame.getInvoiceJTable().validate();
                     JOptionPane.showMessageDialog(frame, "Data loaded successfully", "Loaded", JOptionPane.INFORMATION_MESSAGE);
                 }
                 else

@@ -18,20 +18,20 @@ import sales.start;
 
 public class ImplementsListner implements ActionListener, ListSelectionListener {
     private start frame;
-    private DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy"); // day - month - year
-    close menuBarItemsActionListners;
-    buttons_action buttonsActionListners;
-    loadFile loadFileMenuBarActionListner;
-    savefile saveFileMenuBarActionListner;
-    close closeFileMenuBarActionListner;
+    private DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    close menuBarItemsAction;
+    buttons_action buttonsAction;
+    loadFile loadFileMenuBarAction;
+    savefile saveFileMenuBarAction;
+    close closeFileMenuBarAction;
 
 
     public ImplementsListner(start frame) {
         this.frame = frame;
-        this.buttonsActionListners = new buttons_action(frame);
-        this.loadFileMenuBarActionListner = new loadFile(frame);
-        this.saveFileMenuBarActionListner = new savefile(frame);
-        this.closeFileMenuBarActionListner = new close(frame);
+        this.buttonsAction = new buttons_action(frame);
+        this.loadFileMenuBarAction = new loadFile(frame);
+        this.saveFileMenuBarAction = new savefile(frame);
+        this.closeFileMenuBarAction = new close(frame);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class ImplementsListner implements ActionListener, ListSelectionListener 
             case "LoadFile":
             {
                 try {
-                    loadFileMenuBarActionListner.loadFileMenuBar();
+                    loadFileMenuBarAction.loadFileMenuBar();
                     break;
                 } catch (Exception ex) {
                     Logger.getLogger(ImplementsListner.class.getName()).log(Level.SEVERE, null, ex);
@@ -49,43 +49,43 @@ public class ImplementsListner implements ActionListener, ListSelectionListener 
 
             case "SaveFile" : {
                 try {
-                    saveFileMenuBarActionListner.saveFileMenuBar();
+                    saveFileMenuBarAction.saveFileMenuBar();
                     break;
                 } catch (Exception ex) {
                     Logger.getLogger(ImplementsListner.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
-            case "CloseFile" : closeFileMenuBarActionListner.closeFileMenuBar(); break;
-            case "CreateNewInvoiceButton" : buttonsActionListners.displayNewInvoiceDialog(); break;
-            case "DeleteInvoiceButton" : buttonsActionListners.deleteInvoiceButton(); break;
-            case "SaveButton" : buttonsActionListners.displaySaveButtonNewLineDialog(); break;
-            case "CancelButton" : buttonsActionListners.cancelButton(); break;
-            case "InsertButtonInDialog" : buttonsActionListners.insertButtonInDialog(); break;
-            case "CancelButtonInDialog": buttonsActionListners.cancelButtonInDialog(); break;
-            case "createLineOK" : buttonsActionListners.okButtonNewLineInDialog(); break;
-            case "createLineCancel" : buttonsActionListners.cancelButtonNewLineInDialog(); break;
+            case "CloseFile" : closeFileMenuBarAction.closeFileMenuBar(); break;
+            case "CreateNewInvoiceButton" : buttonsAction.displayNewInvoiceDialog(); break;
+            case "DeleteInvoiceButton" : buttonsAction.deleteInvoiceButton(); break;
+            case "SaveButton" : buttonsAction.displaySaveButtonNewLineDialog(); break;
+            case "CancelButton" : buttonsAction.cancelButton(); break;
+            case "InsertButtonInDialog" : buttonsAction.insertButtonInDialog(); break;
+            case "CancelButtonInDialog": buttonsAction.cancelButtonInDialog(); break;
+            case "createLineOK" : buttonsAction.okButtonNewLineInDialog(); break;
+            case "createLineCancel" : buttonsAction.cancelButtonNewLineInDialog(); break;
             default : throw new AssertionError();
         }
     }
 
     private void rowSelected_InvoiceTable() {
 
-        int selectedRowIndex_InvoiceTable = frame.getInvoiceTableJTableLeftSide().getSelectedRow();
+        int selectedRowIndex_InvoiceTable = frame.getInvoiceJTable().getSelectedRow();
 
         if (selectedRowIndex_InvoiceTable >= 0) { // row >= 0 cause don't work with negative
 
             // effect on data in the top right side
             InvoiceHeader row = frame.getInvoiceHeaderJTableModel().getInvoicesHeaderList().get(selectedRowIndex_InvoiceTable);
-            frame.getCustomerNameJTextField().setText(row.getCustomerName());
-            frame.getInvoiceDateJTextField().setText(dateFormat.format(row.getInvoiceDate()));
-            frame.getInvoiceNumberJLabel().setText("" + row.getInvoiceNumber());
-            frame.getInvoiceTotalJLabel().setText("" + row.getInvoiceTotal());
+            frame.getCustomerName().setText(row.getCustomerName());
+            frame.getInvoiceDate().setText(dateFormat.format(row.getInvoiceDate()));
+            frame.getInvoiceNumber().setText("" + row.getInvoiceNumber());
+            frame.getInvoiceTotal().setText("" + row.getInvoiceTotal());
             ArrayList<InvoiceLine> lines = row.getInvoiceLines();
 
             // line table model
             frame.setInvoiceLineJTableModel(new InvoiceLineJTableModel(lines));
-            frame.getInvoiceItemJTableRightSide().setModel(frame.getInvoiceLineJTableModel());
+            frame.getInvoiceItem().setModel(frame.getInvoiceLineJTableModel());
             frame.getInvoiceLineJTableModel().fireTableDataChanged();
         }
     }
